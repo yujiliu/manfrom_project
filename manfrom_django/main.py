@@ -62,6 +62,7 @@ def main():
     reverse = False  # Is sort reversed?
 
     sort_data_by(data, keyword, reverse)
+    return data
 
 
 if __name__ == "__main__":

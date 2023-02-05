@@ -5,6 +5,24 @@
     <title>Test</title>
 </head>
 <body>
-    <h1>HI EVERYONE</h1>
+    <table>
+        <tr>
+            {% for post in keys %}
+                <th>{{ post }}</th>
+            {% endfor %}
+        </tr>
+        {% for post in worker %}
+            <tr>
+                {% for variable in post.all %}
+                    <th>{{ post.variable }}</th>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <!--
+    {% for post in worker %}
+        <h2>{{ post.customers_id }}</h2>
+    {% endfor %}
+    -->
 </body>
 </html>
