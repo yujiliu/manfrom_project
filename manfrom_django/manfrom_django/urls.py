@@ -15,9 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from test_app.views import index_page
+from rest_framework.routers import SimpleRouter
+
+from test_app.views import visitor_page, VisitorsView, visitor_app
+
+router = SimpleRouter()
+router.register('api/visitors', VisitorsView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index_page)
+    path('', visitor_page),
+    path('visitor_page/', visitor_app),
 ]
+
+urlpatterns += router.urls

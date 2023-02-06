@@ -1,12 +1,13 @@
 from django.db import models
+from main import main
 
 
 # Create your models here.
-class Worker(models.Model):
+class Visitor(models.Model):
     customers_id = models.IntegerField()
     customers_cid = models.CharField(max_length=20)
     customers_vat_id = models.CharField(max_length=20)
-    customers_vat_status = models.BooleanField()
+    customers_vat_id_status = models.BooleanField()
     customers_warning = models.CharField(max_length=20)
     customers_status = models.IntegerField()
     customers_gender = models.CharField(max_length=20)
