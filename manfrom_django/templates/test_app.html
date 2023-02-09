@@ -9,23 +9,13 @@
 </head>
 <body>
     {% verbatim %}
-        <table-lite
-            :has-checkbox="true"
-            :is-loading="table.isLoading"
-            :is-re-search="table.isReSearch"
-            :columns="table.columns"
-            :rows="table.rows"
-            :total="table.totalRecordCount"
-            :sortable="table.sortable"
-            :messages="table.messages"
-            @do-search="doSearch"
-            @is-finished="tableLoadingFinish"
-            @return-checked-rows="updateCheckedRows"
-        ></table-lite>
+        <div class="container" id="visitor_app">
+            <h1 v-for="visitor in  visitors">{{ visitor }}</h1>
+        </div>
     {% endverbatim %}
 
-    <script src="/static/test.js"></script>
-    <!--<script src="/static/app.js"></script>-->
+    <!--<script src="/static/test.js"></script>-->
+    <<script src="/static/app.js"></script>
 
 </body>
 </html>

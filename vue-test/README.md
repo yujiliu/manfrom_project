@@ -1,6 +1,6 @@
 # vue-test
 
-> test_project_for_manfrom
+> A Vue.js project
 
 ## Build Setup
 

@@ -1,4 +1,6 @@
 import operator
+import re
+from os import path
 
 
 wrong_symbols = ['\'', '\"', "\n"]
@@ -21,25 +23,44 @@ def create_dict(main_list, current_list):
             temp_dict[key] = current_list[i]
             i += 1
         except IndexError:
-            temp_dict[key] = ' None'
+            temp_dict[key] = ' None'  # One of the lines was not created with all the fields
+            # filled it with a stub value for normal use
     return temp_dict
 
 
 def sort_data_by(data, keyword, reverse):
-    sorted_data = sorted(data, key=lambda x: x[keyword].lower(), reverse=reverse)
-    print(f'Sorted by {keyword}:')
-    print("\n".join(map(str, sorted_data)), "\n")
+    try:
+        sorted_data = sorted(data, key=lambda x: x[keyword].lower(), reverse=reverse)
+        print(f'Sorted by {keyword}:')
+        print("\n".join(map(str, sorted_data)), "\n")
+    except KeyError:
+        print('Wrong keyword!')
+
+
+def re_find(data, keyword):
+    result = []
+    for person in data:
+        for value in person.values():
+            if bool(re.search(keyword, value, re.IGNORECASE)):
+                result.append(person)
+                break
+    print(f'Search by {keyword}:')
+    if len(result) == 0:
+        print('No matches')
+    else:
+        print("\n".join(map(str, result)), "\n")
 
 
 def main():
-    with open("test.csv", encoding="utf-8") as main_file:
+    basepath = path.dirname(__file__)
+    with open("manfrom_django/test.csv", encoding="utf-8") as main_file:
         name_string = main_file.readline()[:-1]
         print(name_string)
 
-        main_list = [element for element in name_string.split(",")]
-        print(main_list)
+        main_list = [element for element in name_string.split(",")]  # our fields
+        print(main_list, '\n')
 
-        data = []
+        data = []  # List with customers dicts
 
         for line in main_file:
 
@@ -59,10 +80,20 @@ def main():
     print("\n".join(map(str, data)), "\n")
 
     keyword = 'customers_lastname'  # Change sort keyword here
-    reverse = False  # Is sort reversed?
+    reverse = False  # Reverse sorting?
 
     sort_data_by(data, keyword, reverse)
-    return main_list
+
+    keyword = '(^зубко$)'
+    re_find(data, keyword)
+
+    keyword = '(\W|^)[\w.\-]{0,25}@(yahoo|hotmail|mail)(\W|$)'  # regex for email
+    re_find(data, keyword)
+
+    #keyword = '^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$'  # Trying to make regex for cutomers_telephone
+    #re_find(data, keyword)
+
+    #return main_list  # List with fields using in django | Comment this line if u using this script in single-mode.
 
 
 if __name__ == "__main__":

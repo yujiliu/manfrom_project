@@ -13,6 +13,7 @@ class VisitorsView(ModelViewSet):
 
 
 def visitor_page(request):
+
     return render(request, 'index.html', {'visitors': Visitor.objects.all()})
 
 
