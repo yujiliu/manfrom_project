@@ -93,8 +93,6 @@ def main():
     #keyword = '^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$'  # Trying to make regex for cutomers_telephone
     #re_find(data, keyword)
 
-    return main_list  # List with fields using in django | Comment this line if u using this script in single-mode.
-
 
 if __name__ == "__main__":
     main()
